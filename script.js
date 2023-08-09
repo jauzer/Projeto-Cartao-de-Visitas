@@ -10,6 +10,8 @@ function toggleMode() {
   } else {
     html.classList.add("light")
   }*/
+}
 
-  
+function notificacao() {
+  alert("Esse João é Lindo viu... Ave maria")
 }
