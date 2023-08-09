@@ -5,6 +5,27 @@
   box-sizing: border-box; /* para a medida ser atraves da borda */
 }
 
+:root {
+  /* modo escuro Default */
+  --text-color: white; /*criando uma variavel para colocar a cor*/
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.1);
+  --highlight-color-socials: rgba(255, 255, 255, 0.2);
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+.light {
+  /* modo claro*/
+  /*classe para mudar pra light mode a pagina*/
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --highlight-color-socials: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
 body {
   /*
   background-image: url(./assets/bg-mobile.jpg);
@@ -14,12 +35,12 @@ body {
 
   /* SHORT HAND ou ATALHO --> 
   background: color iamge repeat position/size */
-  background: url(./assets/bg-mobile.jpg) no-repeat top center/cover;
+  background: var(--bg-url) no-repeat top center/cover;
 }
 /* "*" aplica oq estiver dentro pra todos os componentes que estiverem dentro do body */
 body * {
   font-family: "Inter Tight", sans-serif;
-  color: #ffffff;
+  color: var(--text-color);
 }
 
 /*CSS não utiliza muito altura (height) pois conforme as coisas vão entrando na pagina vai aumentando a caixa*/
@@ -48,6 +69,46 @@ body * {
   line-height: 24px;
   margin-top: 8px;
 }
+/* SWITCH */
+#switch {
+  position: relative; /*deixar o botão dentro da box dele*/
+  width: 64px;
+  margin: 4px auto;
+}
+
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
+  /*background-image: white var(--switch-bg-url) center; /*logo da lua centralizado e com cor*/
+  border: 0;
+  border-radius: 50%;
+
+  position: absolute; /*faz sobreposicao de camadas (andares)*/
+  top: 50%; /*corrige o alinhamento do "transform: translateY)*/
+  left: 0;
+  z-index: 1; /*subiu um andar*/
+  transform: translateY(-50%); /*alinhar com posicionamento absoluto*/
+}
+
+.light #switch button {
+  right: 0;
+  left: initial;
+}
+
+#switch span {
+  /*span contem "display: inline" e não aceita largura */
+  display: block;
+  width: 64px;
+  height: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+  transition: background 0.6s; /*transicao suave*/
+
+}
 
 /* LINKS */
 ul {
@@ -66,8 +127,8 @@ ul li a {
   justify-content: center; /*centralizar o conteúdo, no caso, o texto*/
   padding: 16px 24px;
 
-  background: rgba(255, 255, 255, 0.1); /* cor do botão (cada link do html) */
-  border: 1px solid rgba(255, 255, 255, 0.5); /*bordinha do botão*/
+  background: var(--surface-color); /* cor do botão (cada link do html) */
+  border: 1px solid var(--stroke-color); /*bordinha do botão*/
   border-radius: 8px; /*arredondar a borda*/
 
   backdrop-filter: blur(4px); /*BLUR*/
@@ -104,7 +165,7 @@ ul li a:hover {
 }
 
 #social-links a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--highlight-color-socials);
 }
 
 footer {
